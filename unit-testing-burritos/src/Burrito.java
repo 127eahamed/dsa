@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Burrito {
     @Nested
@@ -33,7 +34,7 @@ public class Burrito {
             assertFalse(burrito.bowl);
         }
         @Test
-        void setProteinTest() {
+        void setProtein() {
             burrito.setProtein("beef");
             assertEquals("beef", burrito.protein);
             burrito.setProtein("chicken");
@@ -42,7 +43,7 @@ public class Burrito {
             assertEquals(null, burrito.protein);
         }
         @Test
-        void setSideTest() {
+        void setSide() {
             burrito.setSide("chips");
             assertEquals("chips", burrito.side);
             burrito.setSide("salad");
@@ -51,7 +52,7 @@ public class Burrito {
             assertEquals(null, burrito.side);
         }
         @Test
-        void setDrinkTest() {
+        void setDrink() {
             burrito.setDrink("cola");
             assertEquals("cola", burrito.drink);
             burrito.setDrink("lemonade");
@@ -60,13 +61,47 @@ public class Burrito {
             assertEquals(null, burrito.drink);
         }
         @Test
-        void testCoupon() {
-            burrito.coupon()
-            assertEquals("cola", burrito.drink);
-            burrito.setDrink("lemonade");
-            assertEquals("lemonade", burrito.drink);
-            burrito.setDrink(null);
-            assertEquals(null, burrito.drink);
+        void coupon() {
+            burrito.coupon(5);
+            assertEquals(5, burrito.coupon);
+            assertThrows(
+                NegativeCouponException.class,
+                burrito.coupon(-2)
+            );
+            assertEquals(5, burrito.coupon);
+            burrito.coupon(0.99);
+            assertEquals(5.99, burrito.coupon);
+            burrito.coupon(100);
+            assertEquals(105.99, burrito.coupon);
+            burrito.coupon = 0.0;
+            burrito.coupon(7.99);
+            assertEquals(7.99, burrito.coupon);
+            burrito.coupon(1.23);
+            assertEquals(9.22, burrito.coupon);
+        }
+        @Test
+        void percentOff() {
+            burrito.percentOff(0);
+            assertEquals(0, burrito.percentOff);
+            burrito.percentOff(10);
+            assertEquals(10, burrito.percentOff);
+            assertThrows(
+                TooLargePercentOffException.class,
+                burrito.percentOff(200)
+            );
+            assertEquals(10, burrito.percentOff);
+            assertThrows(
+                NegativePercentOffException.class,
+                burrito.percentOff(-20)
+            );
+            assertEquals(10, burrito.percentOff);
+        }
+        @Test
+        void addTopping() {
+            burrito.addTopping("cheese");
+            burrito.addTopping("sour cream");
+            burrito.addTopping("corn");
+            assertEquals(3, burrito.toppings.size());
         }
     }
 
@@ -88,14 +123,46 @@ public class Burrito {
     public void setSide(String side) {}
     public void bowl() {}
     public void burrito() {}
-    public void percentOff(double) {}
-    public void coupon(double) {}
-    public void removeTopping(String) throws RemoveMissingToppingException {
-
-    }
+    public void percentOff(double) throws
+        NegativePercentOffException,
+        TooLargePercentOffException {}
+    public void coupon(double) throws
+        NegativeCouponException {}
+    public void removeTopping(String) throws
+        RemoveMissingToppingException {}
     public void taxExempt(boolean) {}
     public double getCost() {
         return 0.0;
+    }
+
+    public class NegativeCouponException extends Exception {
+        public NegativeCouponException() {
+            super("Coupon can't be negative");
+        }
+
+        public NegativeCouponException(Throwable cause) {
+            super("Coupon can't be negative", cause);
+        }
+    }
+
+    public class TooLargePercentOffException extends Exception {
+        public TooLargePercentOffException() {
+            super("Percent off can't be over 100%");
+        }
+
+        public TooLargePercentOffException(Throwable cause) {
+            super("Percent off can't be over 100%", cause);
+        }
+    }
+
+    public class NegativePercentOffException extends Exception {
+        public NegativePercentOffException() {
+            super("Percent off can't be negative");
+        }
+
+        public NegativePercentOffException(Throwable cause) {
+            super("Percent off can't be negative", cause);
+        }
     }
 
     public class RemoveMissingToppingException extends Exception {
