@@ -32,6 +32,42 @@ public class Burrito {
             burrito.burrito();
             assertFalse(burrito.bowl);
         }
+        @Test
+        void setProteinTest() {
+            burrito.setProtein("beef");
+            assertEquals("beef", burrito.protein);
+            burrito.setProtein("chicken");
+            assertEquals("chicken", burrito.protein);
+            burrito.setProtein(null);
+            assertEquals(null, burrito.protein);
+        }
+        @Test
+        void setSideTest() {
+            burrito.setSide("chips");
+            assertEquals("chips", burrito.side);
+            burrito.setSide("salad");
+            assertEquals("salad", burrito.side);
+            burrito.setSide(null);
+            assertEquals(null, burrito.side);
+        }
+        @Test
+        void setDrinkTest() {
+            burrito.setDrink("cola");
+            assertEquals("cola", burrito.drink);
+            burrito.setDrink("lemonade");
+            assertEquals("lemonade", burrito.drink);
+            burrito.setDrink(null);
+            assertEquals(null, burrito.drink);
+        }
+        @Test
+        void testCoupon() {
+            burrito.coupon()
+            assertEquals("cola", burrito.drink);
+            burrito.setDrink("lemonade");
+            assertEquals("lemonade", burrito.drink);
+            burrito.setDrink(null);
+            assertEquals(null, burrito.drink);
+        }
     }
 
     private String protein;
@@ -39,7 +75,7 @@ public class Burrito {
     private String drink;
     private double cost;
     private boolean bowl;
-    private String sides;
+    private String side;
     private double percentOff;
     private double coupon;
     private boolean taxExempt;
@@ -54,9 +90,21 @@ public class Burrito {
     public void burrito() {}
     public void percentOff(double) {}
     public void coupon(double) {}
-    public void removeTopping(String) {}
+    public void removeTopping(String) throws RemoveMissingToppingException {
+
+    }
     public void taxExempt(boolean) {}
     public double getCost() {
         return 0.0;
+    }
+
+    public class RemoveMissingToppingException extends Exception {
+        public RemoveMissingToppingException() {
+            super("Cannot remove missing topping");
+        }
+
+        public RemoveMissingToppingException(Throwable cause) {
+            super("Cannot remove missing topping", cause);
+        }
     }
 }
