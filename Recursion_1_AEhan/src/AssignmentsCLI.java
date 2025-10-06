@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class AssignmentsCLI {
-    Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("""
 Choose an assignment:
 1: Strictly Increasing Digits Generator
@@ -13,6 +13,9 @@ Choose an assignment:
 
 Pick an assignment to run: (Number or Name)
 """);
-
+        String input = sc.nextLine().toLowerCase();
+        if (
+            (input.contains("1") && !input.contains("consecutive")) ||
+            input.contains("strictly"))
     }
 }
