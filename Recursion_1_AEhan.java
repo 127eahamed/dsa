@@ -134,15 +134,16 @@ public class Recursion_1_AEhan {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("""
-Choose an assignment:
-1: Strictly Increasing Digits Generator
-2: m-th Summation of the First n Natural Numbers
-3: Generate Binary Strings Without Consecutive 1's
-4: Print n-Digit Binary Numbers with Equal Sum in Left and Right Halves
-5: Calculate Maximum Number of Chocolates You Can Eat
-
-Pick assignment to run (number or name):\s""");
+        System.out.print(
+            "Choose an assignment:\n" +
+            "1: Strictly Increasing Digits Generator\n" +
+            "2: m-th Summation of the First n Natural Numbers\n" +
+            "3: Generate Binary Strings Without Consecutive 1's\n" +
+            "4: Print n-Digit Binary Numbers with Equal Sum in Left and Right Halves\n"+
+            "5: Calculate Maximum Number of Chocolates You Can Eat\n"+
+            "\n" +
+            "Pick assignment to run (number or name): "
+        );
         String input = sc.nextLine().toLowerCase();
         if (
             (input.contains("1") && !(
@@ -153,7 +154,7 @@ Pick assignment to run (number or name):\s""");
         ) {
             System.out.print(
                 "\n" +
-                "Assignment 1: Strictly Increasing Digits Generator" +
+                "Assignment 1: Strictly Increasing Digits Generator\n" +
                 "\n" +
                 "Enter number of digits: "
             );
@@ -165,9 +166,9 @@ Pick assignment to run (number or name):\s""");
         ) {
             System.out.print(
                 "\n" +
-                "Assignment 2: m-th Summation of the First n Natural Numbers" +
+                "Assignment 2: m-th Summation of the First n Natural Numbers\n" +
                 "\n" +
-                "Enter n, number of digits: "
+                "Enter number of digits, n: "
             );
         } else if (
             input.contains("3") ||
@@ -179,7 +180,7 @@ Pick assignment to run (number or name):\s""");
                 "\n" +
                 "Assignment 3: Generate Binary Strings Without Consecutive 1's\n" +
                 "\n" +
-                "Enter k, size: "
+                "Enter size/length, k: "
             );
             genBinaryStringsWithoutConsecutive1s(sc.nextInt());
         } else if (
@@ -189,9 +190,9 @@ Pick assignment to run (number or name):\s""");
         ) {
             System.out.print(
                 "\n" +
-                "Assignment 3: Generate Binary Strings Without Consecutive 1's\n" +
+                "Assignment 4: Print n-Digit Binary Numbers with Equal Sum in Left and Right Halves\n" +
                 "\n" +
-                "Enter k, size: "
+                "Enter size/length, n: "
             );
             printNDigitBinaryNumsWithEqualSum(sc.nextInt());
         }
