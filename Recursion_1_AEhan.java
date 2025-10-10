@@ -127,9 +127,18 @@ public class Recursion_1_AEhan {
     /*
      * Assignment 5: Calculate Maximum Number of Chocolates You Can Eat
      * */
+    public static int calcMaxNumOfChocolates(double money, double price, int wrap) {
+        if (money < price) {
+            return 0;
+        } else {
+            int chocolates = (int) (money / price);
+            money -= chocolates * price;
+            chocolates += chocolates / wrap;
+            return chocolates + calcMaxNumOfChocolates(money, price, wrap);
+        }
+    }
 
-
-    /**
+    /*
      * Main Method to Test/Run Each Assignment
      */
     public static void main(String[] args) {
@@ -195,6 +204,30 @@ public class Recursion_1_AEhan {
                 "Enter size/length, n: "
             );
             printNDigitBinaryNumsWithEqualSum(sc.nextInt());
+        } else if (
+            input.contains("5") ||
+            input.contains("chocolate")
+        ) {
+            System.out.print(
+                "\n" +
+                "Assignment 5: Calculate Maximum Number of Chocolates You Can Eat\n" +
+                "\n" +
+                "Enter total amount of money you have to buy chocolates: $"
+            );
+            double money = sc.nextDouble();
+            System.out.print(
+                "\n" +
+                "Enter the price of one chocolate: $"
+            );
+            double price = sc.nextDouble();
+            System.out.print(
+                "\n" +
+                "Enter number of wrappers needed to exchange for one additional chocolate: "
+            );
+            int wrap = sc.nextInt();
+            System.out.println(
+                "Maximum number of chocolates: " + calcMaxNumOfChocolates(money, price, wrap)
+            );
         }
     }
 }
