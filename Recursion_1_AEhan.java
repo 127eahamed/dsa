@@ -47,37 +47,44 @@ public class Recursion_1_AEhan {
     /*
      * Assignment 2: mth Summation of the First n Natural Numbers
      * */
-
+    public static int mthSummationOfFirstNNaturalNums(int n, int m) {
+        int sum = 0;
+        for (int i = 0; i < m; i++) {
+            sum += summationOfFirstNNaturalNums(n)
+        }
+        return sum;
+    }
+    public static int summationOfFirstNNaturalNums(int n) {
+        int sum = 0;
+        for (int naturalNum = 1; naturalNum <= n; naturalNum++) {
+            sum += naturalNum;
+        }
+        return sum;
+    }
 
     /*
      * Assignment 3: Generate Binary Strings Without Consecutive 1's
      * */
-    public static void genBinaryStringsWithoutConsecutive1s(int k) {
-        ArrayList<String> startingStrings = new ArrayList<>();
-        startingStrings.add("0");
-        startingStrings.add("1");
-        for (String str : binaryStringsWithoutConsecutive1s(startingStrings, k)) {
-            System.out.println(str);
-        }
+    public static ArrayList<String> genBinaryStringsWithoutConsecutive1s(int k) {
+        ArrayList<String> result = new ArrayList<>();
+        nextBinaryStringWithoutConsecutive1s(result, "0", k);
+        nextBinaryStringWithoutConsecutive1s(result, "1", k);
+        return result;
     }
-    public static ArrayList<String> binaryStringsWithoutConsecutive1s(
-        ArrayList<String> strings, int k
+    public static void nextBinaryStringWithoutConsecutive1s(
+        ArrayList<String> strings, String binaryString, int k
     ) {
-        ArrayList<String> newStrings = new ArrayList<String>();
-        for (int index = 0; index < strings.size(); index++) {
-            String str = strings.get(index);
-            if (str.length() >= k) {
-                return strings;
-            }
-
-            if (str.charAt(str.length() - 1) == '1') {
-                newStrings.add(index, str + "0");
-            } else {
-                newStrings.add(str + "0");
-                newStrings.add(str + "1");
-            }
+        if (binaryString.length() >= k) {
+            strings.add(binaryString);
+            return;
         }
-        return binaryStringsWithoutConsecutive1s(newStrings, k);
+
+        if (binaryString.endsWith("1")) {
+            nextBinaryStringWithoutConsecutive1s(strings, binaryString + "0", k);
+        } else {
+            nextBinaryStringWithoutConsecutive1s(strings, binaryString + "0", k);
+            nextBinaryStringWithoutConsecutive1s(strings, binaryString + "1", k);
+        }
     }
 
     /*
@@ -191,7 +198,9 @@ public class Recursion_1_AEhan {
                 "\n" +
                 "Enter size/length, k: "
             );
-            genBinaryStringsWithoutConsecutive1s(sc.nextInt());
+            for (String str : genBinaryStringsWithoutConsecutive1s(sc.nextInt())) {
+                System.out.println(str);
+            }
         } else if (
             input.contains("4") ||
             input.contains("equal") ||
