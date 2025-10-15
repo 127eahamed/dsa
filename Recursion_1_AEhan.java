@@ -50,7 +50,7 @@ public class Recursion_1_AEhan {
     public static int mthSummationOfFirstNNaturalNums(int n, int m) {
         int sum = 0;
         for (int i = 0; i < m; i++) {
-            sum += summationOfFirstNNaturalNums(n)
+            sum += summationOfFirstNNaturalNums(n);
         }
         return sum;
     }
@@ -67,24 +67,27 @@ public class Recursion_1_AEhan {
      * */
     public static ArrayList<String> genBinaryStringsWithoutConsecutive1s(int k) {
         ArrayList<String> result = new ArrayList<>();
-        nextBinaryStringWithoutConsecutive1s(result, "0", k);
-        nextBinaryStringWithoutConsecutive1s(result, "1", k);
+        result.addAll(nextBinaryStringWithoutConsecutive1s("0", k));
+        result.addAll(nextBinaryStringWithoutConsecutive1s("1", k));
         return result;
     }
-    public static void nextBinaryStringWithoutConsecutive1s(
-        ArrayList<String> strings, String binaryString, int k
+
+    private static ArrayList<String> nextBinaryStringWithoutConsecutive1s(
+        String binaryString, int k
     ) {
+        ArrayList<String> result = new ArrayList<>();
+
         if (binaryString.length() >= k) {
-            strings.add(binaryString);
-            return;
+            result.add(binaryString);
+            return result;
         }
 
-        if (binaryString.endsWith("1")) {
-            nextBinaryStringWithoutConsecutive1s(strings, binaryString + "0", k);
-        } else {
-            nextBinaryStringWithoutConsecutive1s(strings, binaryString + "0", k);
-            nextBinaryStringWithoutConsecutive1s(strings, binaryString + "1", k);
+        result.addAll(nextBinaryStringWithoutConsecutive1s(binaryString + "0", k));
+        if (!binaryString.endsWith("1")) {
+            result.addAll(nextBinaryStringWithoutConsecutive1s(binaryString + "1", k));
         }
+
+        return result;
     }
 
     /*
@@ -184,8 +187,14 @@ public class Recursion_1_AEhan {
                 "\n" +
                 "Assignment 2: m-th Summation of the First n Natural Numbers\n" +
                 "\n" +
-                "Enter number of digits, n: "
+                "Enter number of natural numbers, n: "
             );
+            int n = sc.nextInt();
+            System.out.print(
+                "\n" +
+                "Enter number of summations, m: "
+            );
+            System.out.println(mthSummationOfFirstNNaturalNums(n, sc.nextInt()));
         } else if (
             input.contains("3") ||
             input.contains("without") ||
