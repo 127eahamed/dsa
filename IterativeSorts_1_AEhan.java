@@ -1,6 +1,6 @@
 public class IterativeSorts_1_AEhan {
     /**
-     * Programming Assignment #1: Implement Selection Sort Algorithm
+     * Assignment #1: Implement Selection Sort Algorithm
      */
     public static void selectionSort(int[] arr) {
         int minIndex = 0;
@@ -17,7 +17,7 @@ public class IterativeSorts_1_AEhan {
         }
     }
     /**
-     * Programming Assignment #2: Implement Insertion Sort Algorithm
+     * Assignment #2: Implement Insertion Sort Algorithm
      */
     public static void insertionSort(int[] arr) {
         for (int current = 1; current < arr.length; current++) {
