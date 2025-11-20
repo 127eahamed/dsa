@@ -11,7 +11,6 @@ public class RecursiveSorts_1_AEhan implements RecursiveSorts {
 
         merge(arr, low, mid, high);
     }
-
     public void merge(int[] arr, int low, int mid, int high) {
         int[] temp = new int[high - low];
         int i = low, j = mid, k = 0;
@@ -35,7 +34,6 @@ public class RecursiveSorts_1_AEhan implements RecursiveSorts {
             arr[low + n] = temp[n];
         }
     }
-
     public void quickSort(int[] arr, int low, int high) {
         if (high - low <= 1) {
             return;
@@ -45,7 +43,6 @@ public class RecursiveSorts_1_AEhan implements RecursiveSorts {
         quickSort(arr, low, pivotIndex);
         quickSort(arr, pivotIndex + 1, high);
     }
-
     public int partition(int[] arr, int low, int high) {
         int pivot = arr[high - 1];
         int i = low;
@@ -67,7 +64,37 @@ public class RecursiveSorts_1_AEhan implements RecursiveSorts {
     }
     public static void main(String[] args) {
         RecursiveSorts_1_AEhan r = new RecursiveSorts_1_AEhan();
-        int[] arr1 = {1,4,2,6,3,4,2,1};
-        r.
+        int[] arr1 = randomArray();
+        System.out.println("Before merge sort:");
+        printArray(arr1);
+        r.mergeSort(arr1, 0, arr1.length);
+        System.out.println("\nAfter merge sort:");
+        printArray(arr1);
+        System.out.println("\n");
+        int[] arr2 = randomArray();
+        System.out.println("Before quicksort:");
+        printArray(arr2);
+        r.mergeSort(arr2, 0, arr2.length);
+        System.out.println("\nAfter quicksort:");
+        printArray(arr2);
+    }
+    public static void printArray(int[] arr) {
+        System.out.print("[");
+        for (int i = 0; i < arr.length - 1; i++) {
+            System.out.print(arr[i] + ", ");
+        }
+        System.out.print(arr[arr.length - 1] + "]");
+    }
+    public static int[] randomArray() {
+        int length = 5 + (int) (Math.random() * 6);
+        int spread = 1000;
+        int[] arr = new int[length];
+        for (int i = 0; i < length; i++) {
+            arr[i] = (Math.random() < 0.5 ?
+                -1 * (int) (Math.random() * spread) :
+                (int) (Math.random() * spread)
+            );
+        }
+        return arr;
     }
 }
