@@ -1,7 +1,7 @@
 public class Task_1_AEhan {
     private String id;
     private String description;
-    private int deadline; /* yyyyMMdd */
+    private int deadline; /* yyyyMMdd, displayed as yyyy-MM-dd in toString() */
     private Task_1_AEhan nextTask;
 
     public Task_1_AEhan(String id, String description, int deadline) {
