@@ -11,6 +11,7 @@ public class TaskManager_1_AEhan {
     }
 
     public void addTask(Task_1_AEhan task) {
+        task.setNextTask(null);
         if (firstTask == null) {
             firstTask = task;
             return;
@@ -32,6 +33,9 @@ public class TaskManager_1_AEhan {
         currentTask.setNextTask(task);
     }
     public Task_1_AEhan removeTask(String id) {
+        if (firstTask == null) {
+            throw new NoSuchElementException("No Tasks (Empty), can't remove task with id \"" + id + "\"");
+        }
         Task_1_AEhan currentTask = firstTask;
         if (id.equals(firstTask.getId())) {
             firstTask = firstTask.getNextTask();
@@ -43,6 +47,7 @@ public class TaskManager_1_AEhan {
                 currentTask.setNextTask(removedTask.getNextTask());
                 return removedTask;
             }
+            currentTask = currentTask.getNextTask();
         }
         throw new NoSuchElementException("No task found with id \"" + id + "\"");
     }
@@ -74,9 +79,10 @@ public class TaskManager_1_AEhan {
                 System.out.println(currentTask);
                 anyPrinted = true;
             }
+            currentTask = currentTask.getNextTask();
         }
         if (!anyPrinted) {
-            System.out.println("No Tasks By or Earlier Than " + deadline);
+            System.out.println("No tasks by or earlier than " + deadline);
         }
     }
 }
