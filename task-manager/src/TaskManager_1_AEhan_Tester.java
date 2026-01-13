@@ -51,6 +51,13 @@ public class TaskManager_1_AEhan_Tester {
         taskManager.tasksByDeadline("2009-01-19");
         System.out.println();
         System.out.println("display tasks by 2025-01-02:");
-        taskManager.tasksByDeadline("2025-01-12");
+        taskManager.tasksByDeadline("2025-01-02");
+        System.out.println();
+        System.out.println("(remove task with id \"task id again?\")");
+        taskManager.removeTask("task id again?");
+        System.out.println();
+        System.out.println("display all tasks:");
+        taskManager.displayAllTasks();
+        System.out.println();
     }
 }
