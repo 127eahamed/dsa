@@ -35,7 +35,7 @@ public class Task_1_AEhan {
 
     public String toString() {
         String deadlineString = "" + deadline;
-        deadlineString = deadlineString.substring(0, 3) + "-" + deadlineString.substring(3, 5) + "-" + deadlineString.substring(5);
+        deadlineString = deadlineString.substring(0, 4) + "-" + deadlineString.substring(4, 6) + "-" + deadlineString.substring(6);
         return "id: " + id + ", description: " + description + ", deadline: " + deadlineString;
     }
 }
