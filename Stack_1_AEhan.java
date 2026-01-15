@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Stack_1_AEhan {
     private String document = "";
+    private Stack<Character> undos = new Stack<Character>();
 
     public String read() {
         return document;
@@ -13,7 +14,6 @@ public class Stack_1_AEhan {
     }
 
     public void undo() {
-
     }
 
     public void redo() {
