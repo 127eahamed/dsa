@@ -14,10 +14,18 @@ public class Stack_1_AEhan {
     }
 
     public void undo() {
+        if (document.isEmpty()) {
+            return;
+        }
+        undos.push(document.charAt(document.length() - 1));
+        document = document.substring(0, document.length() - 1);
     }
 
     public void redo() {
-
+        if (undos.empty()) {
+            return;
+        }
+        document = document + undos.pop();
     }
 
     public static void main(String[] args) {
@@ -33,28 +41,41 @@ public class Stack_1_AEhan {
                 continue;
             } else if (command.toUpperCase().startsWith("WRITE")) {
                 /* write command with no space */
-                System.out.println("The command WRITE X needs to be followed by a character to write");
+                System.out.println("The command WRITE needs to be followed by a character to write");
                 continue;
             }
-            if (command.toUpperCase().startsWith("READ")) {
+            String commandAlphaNumeric = command.replaceAll("[^a-zA-Z0-9]", "");
+            if (commandAlphaNumeric.equalsIgnoreCase("READ")) {
                 System.out.println(textEditor.read());
                 continue;
             }
-            if (command.toUpperCase().startsWith("UNDO")) {
+            if (commandAlphaNumeric.equalsIgnoreCase("UNDO")) {
                 textEditor.undo();
                 continue;
             }
-            if (command.toUpperCase().startsWith("REDO")) {
+            if (commandAlphaNumeric.equalsIgnoreCase("REDO")) {
                 textEditor.redo();
                 continue;
             }
             if (
-                command.toUpperCase().startsWith("EXIT") ||
-                command.toUpperCase().startsWith("QUIT") ||
-                command.equalsIgnoreCase("q")
+                commandAlphaNumeric.equalsIgnoreCase("EXIT") ||
+                commandAlphaNumeric.equalsIgnoreCase("QUIT") ||
+                commandAlphaNumeric.equalsIgnoreCase("q")
             ) {
                 System.exit(0);
             }
+            System.out.println(
+"""
+Unknown command :(
+
+Valid commands are:
+WRITE X
+READ
+UNDO
+REDO
+EXIT
+QUIT"""
+            );
         }
     }
 }
