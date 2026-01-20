@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Queue_1_AEhan {
     public static void main(String[] args) {
-        Queue<String> people = new Queue<String>();
+        Queue<String> line = new Queue<String>();
         Scanner scn = new Scanner(System.in);
         int count;
         while (true) {
@@ -19,7 +19,7 @@ public class Queue_1_AEhan {
         }
         for (int i = 0; i < count; i++) {
             System.out.print("Please enter the next person who got onto the line: ");
-            people.enqueue(scn.nextLine());
+            line.enqueue(scn.nextLine());
         }
         int carsPerCoaster;
         while (true) {
@@ -52,12 +52,12 @@ public class Queue_1_AEhan {
             System.out.print("How many times should the coaster run: ");
             if (scn.hasNextInt()) {
                 runs = scn.nextInt();
-                if (runs > 0) {
+                if (runs >= 0) {
                     scn.nextLine();
                     break;
                 }
             }
-            System.out.println("Enter a positive integer greater than 0");
+            System.out.println("Enter a positive integer");
             scn.nextLine();
         }
         for (int i = 0; i < runs; i++) {
@@ -65,11 +65,16 @@ public class Queue_1_AEhan {
             System.out.println();
             System.out.println("Run #" + (i - -1));
             for (int person = 0; person < peoplePerRun; person++) {
-                if (people.isEmpty()) {
+                if (line.isEmpty()) {
                     break;
                 }
-                System.out.println(people.dequeue());
+                System.out.println(line.dequeue());
             }
+        }
+        System.out.println();
+        System.out.println("Line");
+        while (!line.isEmpty()) {
+            System.out.println(line.dequeue());
         }
     }
 }
