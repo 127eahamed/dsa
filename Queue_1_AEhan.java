@@ -9,16 +9,16 @@ public class Queue_1_AEhan {
             System.out.print("How many people are on line: ");
             if (scn.hasNextInt()) {
                 count = scn.nextInt();
-                if (count >= 0) {
+                if (count > 0) {
                     scn.nextLine();
                     break;
                 }
             }
-            System.out.println("Enter a positive integer");
+            System.out.println("Enter a positive integer greater than 0");
             scn.nextLine();
         }
         for (int i = 0; i < count; i++) {
-            System.out.print("Please enter the next person who got onto the line: ");
+            System.out.print("Please enter the next person who got onto the line(no spaces): ");
             line.enqueue(scn.nextLine());
         }
         int carsPerCoaster;
