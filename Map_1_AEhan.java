@@ -14,8 +14,8 @@ public class Map_1_AEhan<K,V> {
         return new HashSet<K>(keys);
     }
     public void clear() {
-        keys = new ArrayList<K>();
-        values = new ArrayList<V>();
+        keys.clear();
+        values.clear();
     }
     public boolean add(K key, V value) {
         if (keys.contains(key)) {
@@ -37,7 +37,11 @@ public class Map_1_AEhan<K,V> {
         return values.remove(index);
     }
     public V get(K key) {
-        return values.get(keys.indexOf(key));
+        int index = keys.indexOf(key);
+        if (index < 0) {
+            throw new IllegalArgumentException("Key not found");
+        }
+        return values.get(index);
     }
     public V set(K key, V value) {
         int index = keys.indexOf(key);
