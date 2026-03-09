@@ -69,10 +69,18 @@ public class BST_1_AEhan<E extends Comparable<E>> {
     public BSTNode<E> getRoot() {
         return root;
     }
-    public ArrayList<E> preorder() {
+    public ArrayList<E> preorder(BSTNode<E> subroot) {
+        ArrayList<E> result = new ArrayList<E>();
+        result.addAll(pre)
     }
-    public ArrayList<E> inorder() {
-
+    public ArrayList<E> inorder(BSTNode<E> subroot) {
+        ArrayList<E> result = new ArrayList<E>();
+        if (subroot.getLeft() == null) {
+            result.add(subroot.getValue());
+        } else {
+            result.addAll(inorder(subroot.getLeft()));
+        }
+        return result;
     }
     public ArrayList<E> postorder() {
     }
@@ -80,10 +88,7 @@ public class BST_1_AEhan<E extends Comparable<E>> {
         return height(getRoot());
     }
     public int height(BSTNode<E> subroot) {
-        if (subroot == null) {
-            return -1;
-        }
-        return 1 + Math.max(height(subroot.getLeft()), height(subroot.getRight()));
+        return subroot == null ? -1 : 1 + Math.max(height(subroot.getLeft()), height(subroot.getRight()));
     }
     public int depth(E value) {
         BSTNode<E> current = getRoot();
