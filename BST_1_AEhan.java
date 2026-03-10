@@ -24,6 +24,9 @@ public class BST_1_AEhan<E extends Comparable<E>> {
         public void setRight(BSTNode<E> node) {
             right = node;
         }
+        public void setValue(E value) {
+            this.value = value;
+        }
     }
     public boolean search(E value) {
         if (root == null) {
@@ -71,18 +74,36 @@ public class BST_1_AEhan<E extends Comparable<E>> {
     }
     public ArrayList<E> preorder(BSTNode<E> subroot) {
         ArrayList<E> result = new ArrayList<E>();
-        result.addAll(pre)
-    }
-    public ArrayList<E> inorder(BSTNode<E> subroot) {
-        ArrayList<E> result = new ArrayList<E>();
-        if (subroot.getLeft() == null) {
-            result.add(subroot.getValue());
-        } else {
+        result.add(subroot.getValue());
+        if (subroot.getLeft() != null) {
             result.addAll(inorder(subroot.getLeft()));
+        }
+        if (subroot.getRight() != null) {
+            result.addAll(inorder(subroot.getRight()));
         }
         return result;
     }
-    public ArrayList<E> postorder() {
+    public ArrayList<E> inorder(BSTNode<E> subroot) {
+        ArrayList<E> result = new ArrayList<E>();
+        if (subroot.getLeft() != null) {
+            result.addAll(inorder(subroot.getLeft()));
+        }
+        result.add(subroot.getValue());
+        if (subroot.getRight() != null) {
+            result.addAll(inorder(subroot.getRight()));
+        }
+        return result;
+    }
+    public ArrayList<E> postorder(BSTNode<E> subroot) {
+        ArrayList<E> result = new ArrayList<E>();
+        if (subroot.getLeft() != null) {
+            result.addAll(inorder(subroot.getLeft()));
+        }
+        if (subroot.getRight() != null) {
+            result.addAll(inorder(subroot.getRight()));
+        }
+        result.add(subroot.getValue());
+        return result;
     }
     public int height() {
         return height(getRoot());
@@ -100,6 +121,44 @@ public class BST_1_AEhan<E extends Comparable<E>> {
         return depth;
     }
     public boolean remove(E value) {
+        BSTNode<E> parent = null;
+        BSTNode<E> current = getRoot();
+        while (current != null && !current.getValue().equals(value)) {
+            parent = current;
+            if (value.compareTo(current.getValue()) < 0) {
+                current = current.getLeft();
+            } else {
+                current = current.getRight();
+            }
+        }
+        if (current == null) {
+            return false;
+        }
+        if (current.getLeft() != null && current.getRight() != null) {
+            BSTNode<E> minParent = current;
+            BSTNode<E> min = current.getRight();
 
+            while (min.getLeft() != null) {
+                minParent = min;
+                min = min.getLeft();
+            }
+            current.setValue(min.getValue());
+            current = min;
+            parent = minParent;
+        }
+        BSTNode<E> child;
+        if (current.getLeft() != null) {
+            child = current.getLeft();
+        } else {
+            child = current.getRight();
+        }
+        if (parent == null) {
+            root = child;
+        } else if (parent.getLeft().getValue().equals(current.getValue())) {
+            parent.setLeft(child);
+        } else {
+            parent.setRight(child);
+        }
+        return true;
     }
 }
