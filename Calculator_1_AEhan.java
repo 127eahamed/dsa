@@ -1,7 +1,32 @@
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Calculator_1_AEhan implements Calculator2 {
+public class Calculator_1_AEhan implements Calculator1, Calculator2, Calculator3 {
+    public ExpNode buildTree(String expression) {
+        int parentheses = 0;
+        for (int i = expression.length() - 1; i >= 0; i--) {
+            char current = expression.charAt(i);
+            if (current == ')') {
+                parentheses++;
+            } else if (current == '(' && parentheses == 0) {
+                throw new IllegalArgumentException("Attempting to close an unopened parenthesis");
+            } else if (current == '(') {
+                parentheses--;
+            }
+        }
+        return null;
+    }
+    public ArrayList<MathSymbol> postfix(ExpNode current) {
+        ArrayList<MathSymbol> result = new ArrayList<MathSymbol>();
+        if (current.getLeft() != null) {
+            result.addAll(postfix(current.getLeft()));
+        }
+        if (current.getRight() != null) {
+            result.addAll(postfix(current.getRight()));
+        }
+        result.add(current.getValue());
+        return result;
+    }
     public Double calculate(ArrayList<MathSymbol> postfix) {
         Stack<Double> stack = new Stack<Double>();
         for (MathSymbol element : postfix) {
@@ -15,30 +40,7 @@ public class Calculator_1_AEhan implements Calculator2 {
         }
         return stack.pop();
     }
-
-    // public ExpNode buildTree(String expression) {
-    //     int parentheses = 0;
-    //     for (int i = expression.length() - 1; i >= 0; i--) {
-    //         char current = expression.charAt(i);
-    //         if (current == ')') {
-    //             parentheses++;
-    //         } else if (current == '(' && parentheses == 0) {
-    //             throw new IllegalArgumentException("Attempting to close an unopened parenthesis");
-    //         } else if (current == '(') {
-    //             parentheses--;
-    //         }
-    //     }
-    // }
-
-    // public ArrayList<MathSymbol> postfix(ExpNode current) {
-    //     ArrayList<MathSymbol> result = new ArrayList<MathSymbol>();
-    //     if (current.getLeft() != null) {
-    //         result.addAll(postfix(current.getLeft()));
-    //     }
-    //     if (current.getRight() != null) {
-    //         result.addAll(postfix(current.getRight()));
-    //     }
-    //     result.add(current.getValue());
-    //     return result;
-    // }
+    public Double calculate(String expression) {
+        return calculate(postfix(buildTree(expression)));
+    }
 }
