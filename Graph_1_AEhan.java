@@ -32,9 +32,9 @@ public class Graph_1_AEhan<E> {
         }
 
         for (GraphNode_1_AEhan<E> node : current.getConnections()) {
-            if (!path.contains(node)) {
+            if (!path.contains(node) && node != current) {
                 ArrayList<GraphNode_1_AEhan<E>> newPath = new ArrayList<GraphNode_1_AEhan<E>>(path);
-                newPath.add(node);
+                newPath.add(current);
                 printPathCycles(node, end, newPath);
             }
         }
