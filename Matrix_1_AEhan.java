@@ -1,6 +1,6 @@
 public class Matrix_1_AEhan {
-    private double[][] costs;
-    private String[][] paths;
+    private final double[][] costs;
+    private final String[][] paths;
 
     public Matrix_1_AEhan(int numNodes) {
         costs = new double[numNodes][numNodes];
