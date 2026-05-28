@@ -25,11 +25,13 @@ public class WeightedNode_1_AEhan<E> {
             }
             index++;
         }
-        if (index == connections.size()) {
-            index = connections.size() - 1;
+        if (index < connections.size()) {
+            connections.add(index, node);
+            costs.add(index, cost);
+        } else {
+            connections.add(node);
+            costs.add(cost);
         }
-        connections.add(index, node);
-        costs.add(index, cost);
     }
 
     public double getCost(WeightedNode_1_AEhan<E> node) {
