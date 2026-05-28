@@ -42,24 +42,4 @@ public class Matrix_1_AEhan {
         }
         return result.toString();
     }
-    public static void main(String[] args) {
-        Matrix_1_AEhan matrix = new Matrix_1_AEhan(4);
-        matrix.set(0, 0, Double.POSITIVE_INFINITY, "AA");
-        matrix.set(0, 1, 8.0, "AB");
-        matrix.set(0, 2, Double.POSITIVE_INFINITY, "AC");
-        matrix.set(0, 3, 2.0, "AD");
-        matrix.set(1, 0, Double.POSITIVE_INFINITY, "BA");
-        matrix.set(1, 1, Double.POSITIVE_INFINITY, "BB");
-        matrix.set(1, 2, 5.0, "BC");
-        matrix.set(1, 3, Double.POSITIVE_INFINITY, "BD");
-        matrix.set(2, 0, 1.0, "CA");
-        matrix.set(2, 1, Double.POSITIVE_INFINITY, "CB");
-        matrix.set(2, 2, Double.POSITIVE_INFINITY, "CC");
-        matrix.set(2, 3, 4.0, "CD");
-        matrix.set(3, 0, Double.POSITIVE_INFINITY, "DA");
-        matrix.set(3, 1, Double.POSITIVE_INFINITY, "DB");
-        matrix.set(3, 2, Double.POSITIVE_INFINITY, "DC");
-        matrix.set(3, 3, Double.POSITIVE_INFINITY, "DD");
-        System.out.println(matrix);
-    }
 }
